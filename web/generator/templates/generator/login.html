@@ -1,0 +1,103 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<title>weather</title>
+    <!link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="icon" href="{% static 'generator/img/icon/wff.ico' %}" type="image/x-icon">
+<title>Title</title>
+</head>
+<style>
+  .div4
+{
+height:600px;
+width:1349x;
+}
+ form
+{
+width:300px;
+padding:12px 20px;
+margin:-12px 0px;
+box-sizing:border-box;
+}
+button, input, optgroup, select, textarea {
+    margin: 3px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+b
+{
+color:white;
+}
+.div1
+{
+background-color:#0c2638;
+padding: 50px;
+height:300px;
+width:350px;
+margin:0 auto;
+}
+.error
+{
+width:313px;
+height:32px;
+margin:auto;
+color:#0c2638
+}
+img
+{
+margin-left:20px;
+}
+.button2
+   {
+   background-color: #0c2638;
+   border-radius:5px;
+   color: purple;
+   padding:15px 32px;
+   text-align:center;
+   display:inline-block;
+   font-size:13px;
+   margin-left:8px;
+   border-style:solid;
+   border-width:3px;
+
+   }
+ .div2
+ {
+ height:50px;
+ width:200px;
+ background-color:white;
+ }
+
+</style>
+<body>
+{% load static %}
+<div class="div4" style="background-image: url({% static 'generator/thunder.jpg' %}" >
+<img  src="{% static 'generator/wff.png' %}" alt="my" height="150px" width="150px"  >
+<nav class="row" style="background: #0c2638; color: white;margin-top:-118px;margin-left:50px;">
+    <h1>   <h2 style="margin-top:26px;margin-left:150px;font-family:seoge script"><i><b>Login</b></i></h2></h1>
+</nav>
+
+<br>
+<div class="error">
+<b  style="color:white">
+    {{ error }}</b>
+</div>
+<div class="div1">
+    <form method="POST">
+     {% csrf_token %}
+    <input type="hidden" name="CsrfViewMiddleware" value="V0Z53I1XnvQWqtSgVjzN4Qn1pIH0FEfmTQ4q3W0Z42BZXPrw9nIOUBTOxddDpi2I">
+        <p><label for="id_username"><b>Username:</b></label> <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username"></p>
+        <p><label for="id_password"><b>Password:</b></label> <input type="password" name="password" autocomplete="current-password" required="" id="id_password"></p>
+        <button type="submit" class="button2"><b>LOGIN</b></button>
+
+</form>
+
+
+</div>
+</div>
+</body>
+</html>

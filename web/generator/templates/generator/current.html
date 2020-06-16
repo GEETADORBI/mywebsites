@@ -1,0 +1,728 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <title>weather</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg4rES-cHvkyowz2QjYSS1aQi1vBJaYYM=places"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   <script>function validateForm() {
+  var x = document.forms["myForm"]["city"].value;
+  if (x == "" || x == null) {
+    alert("Enter City Name");
+    return false;
+  }
+}
+</script>
+    <link rel="icon" href="{% static 'generator/img/icon/wff.ico' %}" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideDown("slow")
+
+
+  });
+});
+</script>
+    <style>
+          .col1
+        {
+        width:300px;
+        margin-top:20px;
+        height:120px;
+        background-color: white;
+        margin-left:29px;
+        color:black;
+        }
+ img1
+{
+margin-left:20px;
+}
+body {
+  font: 16px Arial;
+}
+
+input[type=text] {
+  background-color: white;
+  width: 200px;
+  height:50px;
+
+
+}
+    .button2
+
+   {
+   background-color:#0c2638;
+
+   color: white;
+   padding:15px 32px;
+   text-align:center;
+   display:inline-block;
+   font-size:15px;
+    margin-left:35px;
+
+   }
+
+.divv
+{
+height:30px;
+width:144px;
+margin-left:503px;
+margin-top:60px;
+}
+
+
+   h2
+   {
+   width:500px;
+   }
+
+.divicon
+{
+height:100px;
+width:100px;
+margin-left:187px;
+margin-top:-102px;
+}
+.btn
+{
+margin-left:413px;
+margin-top:-169px;}
+   </style>
+</head>
+<body>
+
+<img  src="{% static 'generator/wff.png' %}"  style="margin-left:20px;" alt="my" height="150px" width="150px"  >
+<nav class="row" style="background: #0c2638; color: white;margin-top:-118px;margin-left:50px;">
+    <h1>   <h2 style="margin-top:26px;margin-left:150px;font-family:seoge script"><i><b>Welcome,
+    {% if user.is_authenticated %}{{ user.username }}
+
+{% endif %}</b></i></h2></h1>
+      <div class="divv"><a href="{% url 'home' %}" style="text-decoration:none"><b style="color:white"> Logout</b></a>
+      </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6" style="margin-top:40px;margin-left:0px;">
+            <!form method="POST">
+<b style="margin-left:20px;"> CLICK here to get your city weather</b>
+    <img  src="{% static 'generator/arow.gif' %}"  style="margin-left:20px;" alt="my" height="10px" width="50px"  >
+
+     <form name="myForm" method="post"   onsubmit="return validateForm()" style="margin-left:20px;">
+      {% csrf_token %}
+        <input type="hidden" name="CsrfViewMiddleware" value="V0Z53I1XnvQWqtSgVjzN4Qn1pIH0FEfmTQ4q3W0Z42BZXPrw9nIOUBTOxddDpi2I">
+         <label for="cityname"><b>City:</b></label>
+    <input type="text" id="autocomplete" class="form-control" name="city" placeholder="enter city name" id="cityname" style="width:350px;">
+         <div class="btn">
+              <button type="submit" style="background-color:white;border-style:none" >
+                <img src="{% static 'generator/click.gif' %}" height="100px" width="124px">
+              </button>
+</div>
+
+
+     </form>
+
+
+        </div>
+
+ <h1>{{ error }}</h1>
+
+<div class="col-sm-3">
+
+<br>
+    <br>
+
+    {% if country_codee and coordinatee and tempp and namee and pressuree and humidityy and windd %}
+
+      <h1>Country code : {{country_codee}}</h1>
+      <h5 ><b>Name</b>:{{namee}}</h5>
+      <h5 ><b>Coordinate</b> : {{coordinatee}}</h5>
+        <h5 ><b>Temp </b>: {{tempp}}</h5>
+
+      <h5 ><b>Pressure</b> : {{pressuree}} </h5>
+      <h5 ><b>Humidity</b> : {{humidityy}}</h5>
+        <h5><b>Wind Speed</b> : {{windd}}</h5>
+    <h5><b>Description</b> : {{descriptionn}}</h5>
+
+ {% endif %}
+</div>
+        <div class="col-sm-3">
+
+<img src="{% static 'generator/sunn.gif' %}"  style="margin-left:40px;margin-top:40px;" alt="my" height="200px" width="200px">
+
+</div>
+
+    </div>
+
+     <div class="container-fluid">
+<div class="row">
+    {% if  temp and date and humidity and weather and icon %}
+         <div class="col1" >
+             <marquee><h4><b>Date and time</b>:{{date}}</h4></marquee>
+      <h5><b>Humidity</b>: {{humidity}}</h5>
+        <h5><b>Temp </b>: {{temp}}</h5>
+      <h5><b>Weather</b>:{{weather}}</h5>
+             <div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon}}@2x.png alt="Image" height="90px">
+             </div>
+      {% endif %}
+
+         </div>
+
+    {% if  temp1 and date1 and humidity1 and weather1 and icon1 %}
+  <div class="col1" >
+       <marquee><h4><b>Date and time</b>:{{date1}}</h4></marquee>
+ <h5><b>Humidity</b>: {{humidity1}}</h5>
+        <h5><b>Temp </b>: {{temp1}}</h5>
+
+      <h5><b>weather</b>:{{weather1}}</h5>
+      <div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon1}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+  </div>
+
+    {% if  temp2 and date2 and humidity2 and weather2 and icon2 %}
+     <div class="col1" >
+<marquee> <h4><b>Date and time</b>:{{date2}}</h4></marquee>
+ <h5><b>Humidity</b>: {{humidity2}}</h5>
+     <h5><b>Temp </b>: {{temp2}}</h5>
+     <h5><b>Weather</b>:{{weather2}}</h5>
+
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon2}}@2x.png alt="Image">
+  </div>
+         {% endif %}
+
+  </div>
+
+ <div class="col1" >
+    {% if  temp3 and date3 and humidity3 and weather3 and icon3%}
+<marquee><h4><b>Date and time</b>:{{date3}}</h4></marquee>
+ <h5><b>Humidity</b>: {{humidity3}}</h5>
+        <h5><b>Temp </b>: {{temp3}}</h5>
+      <h5><b>Weather</b>:{{weather3}}</h5>
+ <div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon3}}@2x.png alt="Image">
+  </div>
+
+
+    {% endif %}
+
+  </div>
+
+ <div class="col1" >
+    {% if  temp4 and date4 and weather4 and icon4 and humidity4 %}
+
+<marquee><h4><b>Date and time</b>:{{date4}}</h4></marquee>
+        <h5><b>Humidity</b>: {{humidity4}}</h5>
+     <h5><b>Temp </b>: {{temp4}}</h5>
+      <h5><b>Weather</b>: {{weather4}}</h5>
+      <div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon4}}@2x.png alt="Image">
+  </div>
+
+
+    {% endif %}
+
+  </div>
+
+
+ <div class="col1" >
+    {% if  temp5 and date5 and weather5 and humidity5 and icon5 %}
+     <marquee><h4><b>Date and Time</b>:{{date5}}</h4></marquee>
+         <h5><b>Humidity</b>:{{humidity5}}</h5>
+     <h5><b>Temp </b>: {{temp5}}</h5>
+
+      <h5><b>Weather</b>:{{weather5}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon5}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+
+    </div>
+<br>
+ <div class="col1" >
+    {% if  temp6 and date6 and humidity6 and weather6 and icon6 %}
+<marquee><h4><b>Date and Time</b>:{{date6}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity6}}</h5>
+        <h5><b>Temp </b>: {{temp6}}</h5>
+      <h5><b>Weather</b>:{{weather6}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon6}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+        <div class="col1" >
+    {% if  temp7 and date7 and humidity7 and weather7 and icon7 %}
+<marquee><h4><b>Date and Time</b>:{{date7}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity7}}</h5>
+        <h5><b>Temp </b>: {{temp7}}</h5>
+      <h5><b>Weather</b>:{{weather7}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon7}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp8 and date8 and humidity8 and weather8 and icon8 %}
+<marquee><h4><b>Date and Time</b>:{{date8}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity8}}</h5>
+        <h5><b>Temp </b>: {{temp8}}</h5>
+      <h5><b>Weather</b>:{{weather8}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon8}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp9 and date9 and humidity9 and weather9 and icon9 %}
+<marquee><h4><b>Date and Time</b>:{{date9}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity9}}</h5>
+        <h5><b>Temp </b>: {{temp9}}</h5>
+      <h5><b>Weather</b>:{{weather9}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon9}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp10 and date10 and humidity10 and weather10 and icon10 %}
+<marquee><h4><b>Date and Time</b>:{{date10}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity10}}</h5>
+        <h5><b>Temp </b>: {{temp10}}</h5>
+      <h5><b>Weather</b>:{{weather10}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon10}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div><div class="col1" >
+    {% if  temp11 and date11 and humidity11 and weather11 and icon11 %}
+<marquee><h4><b>Date and Time</b>:{{date11}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity11}}</h5>
+        <h5><b>Temp </b>: {{temp11}}</h5>
+      <h5><b>Weather</b>:{{weather11}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon11}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp12 and date12 and humidity12 and weather12 and icon12 %}
+<marquee><h4><b>Date and Time</b>:{{date12}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity12}}</h5>
+        <h5><b>Temp </b>: {{temp12}}</h5>
+      <h5><b>Weather</b>:{{weather12}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon12}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp13 and date13 and humidity13 and weather13 and icon13 %}
+<marquee><h4><b>Date and Time</b>:{{date13}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity13}}</h5>
+        <h5><b>Temp </b>: {{temp13}}</h5>
+      <h5><b>Weather</b>:{{weather13}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon13}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp14 and date14 and humidity14 and weather14 and icon14%}
+<marquee><h4><b>Date and Time</b>:{{date14}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity14}}</h5>
+        <h5><b>Temp </b>: {{temp14}}</h5>
+      <h5><b>Weather</b>:{{weather14}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon14}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp15 and date15 and humidity15 and weather15 and icon15%}
+<marquee><h4><b>Date and Time</b>:{{date15}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity15}}</h5>
+        <h5><b>Temp </b>: {{temp15}}</h5>
+      <h5><b>Weather</b>:{{weather15}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon15}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div><div class="col1" >
+    {% if  temp16 and date16 and humidity16 and weather16 and icon16 %}
+<marquee><h4><b>Date and Time</b>:{{date16}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity16}}</h5>
+        <h5><b>Temp </b>: {{temp16}}</h5>
+      <h5><b>Weather</b>:{{weather16}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon16}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp17 and date17 and humidity17 and weather17 and icon17 %}
+<marquee><h4><b>Date and Time</b>:{{date17}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity17}}</h5>
+        <h5><b>Temp </b>: {{temp17}}</h5>
+      <h5><b>Weather</b>:{{weather17}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon17}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp18 and date18 and humidity18 and weather18 and icon18 %}
+<marquee><h4><b>Date and Time</b>:{{date18}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity18}}</h5>
+        <h5><b>Temp </b>: {{temp18}}</h5>
+      <h5><b>Weather</b>:{{weather18}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon18}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+
+
+
+    <div class="col1" >
+    {% if  temp19 and date19 and humidity19 and weather19 and icon19 %}
+<marquee><h4><b>Date and Time</b>:{{date19}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity19}}</h5>
+        <h5><b>Temp </b>: {{temp19}}</h5>
+      <h5><b>Weather</b>:{{weather19}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon19}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+
+     {% if  temp20 and date20 and humidity20 and weather20 and icon20 %}
+         <div class="col1" >
+             <marquee><h4><b>Date and time</b>:{{date20}}</h4></marquee>
+      <h5><b>Humidity</b>: {{humidity20}}</h5>
+        <h5><b>Temp </b>: {{temp20}}</h5>
+      <h5><b>Weather</b>:{{weather20}}</h5>
+             <div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon}}@2x.png alt="Image" height="90px">
+             </div>
+      {% endif %}
+
+         </div>
+
+    {% if  temp21 and date21 and humidity21 and weather21 and icon21 %}
+  <div class="col1" >
+       <marquee><h4><b>Date and time</b>:{{date21}}</h4></marquee>
+ <h5><b>Humidity</b>: {{humidity21}}</h5>
+        <h5><b>Temp </b>: {{temp21}}</h5>
+
+      <h5><b>weather</b>:{{weather21}}</h5>
+      <div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon21}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+  </div>
+
+    {% if  temp22 and date22 and humidity22 and weather22 and icon22 %}
+     <div class="col1" >
+<marquee> <h4><b>Date and time</b>:{{date22}}</h4></marquee>
+ <h5><b>Humidity</b>: {{humidity22}}</h5>
+     <h5><b>Temp </b>: {{temp22}}</h5>
+     <h5><b>Weather</b>:{{weather22}}</h5>
+
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon22}}@2x.png alt="Image">
+  </div>
+         {% endif %}
+
+  </div>
+
+ <div class="col1" >
+    {% if  temp23 and date23 and humidity23 and weather23 and icon23%}
+<marquee><h4><b>Date and time</b>:{{date23}}</h4></marquee>
+ <h5><b>Humidity</b>: {{humidity23}}</h5>
+        <h5><b>Temp </b>: {{temp23}}</h5>
+      <h5><b>Weather</b>:{{weather23}}</h5>
+ <div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon3}}@2x.png alt="Image">
+  </div>
+
+
+    {% endif %}
+
+  </div>
+
+ <div class="col1" >
+    {% if  temp24 and date24 and weather24 and icon24 and humidity24 %}
+
+<marquee><h4><b>Date and time</b>:{{date24}}</h4></marquee>
+        <h5><b>Humidity</b>: {{humidity24}}</h5>
+     <h5><b>Temp </b>: {{temp24}}</h5>
+      <h5><b>Weather</b>: {{weather24}}</h5>
+      <div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon24}}@2x.png alt="Image">
+  </div>
+
+
+    {% endif %}
+
+  </div>
+
+
+ <div class="col1" >
+    {% if  temp25 and date25 and weather25 and humidity25 and icon25 %}
+     <marquee><h4><b>Date and Time</b>:{{date25}}</h4></marquee>
+         <h5><b>Humidity</b>:{{humidity25}}</h5>
+     <h5><b>Temp </b>: {{temp25}}</h5>
+
+      <h5><b>Weather</b>:{{weather25}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon25}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+
+    </div>
+<br>
+ <div class="col1" >
+    {% if  temp26 and date26 and humidity26 and weather26 and icon26 %}
+<marquee><h4><b>Date and Time</b>:{{date26}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity26}}</h5>
+        <h5><b>Temp </b>: {{temp26}}</h5>
+      <h5><b>Weather</b>:{{weather26}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon26}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+        <div class="col1" >
+    {% if  temp27 and date27 and humidity27 and weather27 and icon27 %}
+<marquee><h4><b>Date and Time</b>:{{date27}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity27}}</h5>
+        <h5><b>Temp </b>: {{temp27}}</h5>
+      <h5><b>Weather</b>:{{weather27}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon27}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp28 and date28 and humidity28 and weather28 and icon28 %}
+<marquee><h4><b>Date and Time</b>:{{date28}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity28}}</h5>
+        <h5><b>Temp </b>: {{temp28}}</h5>
+      <h5><b>Weather</b>:{{weather28}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon28}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp29 and date29 and humidity29 and weather29 and icon29 %}
+<marquee><h4><b>Date and Time</b>:{{date9}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity9}}</h5>
+        <h5><b>Temp </b>: {{temp9}}</h5>
+      <h5><b>Weather</b>:{{weather9}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon9}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp30 and date30 and humidity30 and weather30 and icon30 %}
+<marquee><h4><b>Date and Time</b>:{{date30}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity30}}</h5>
+        <h5><b>Temp </b>: {{temp30}}</h5>
+      <h5><b>Weather</b>:{{weather30}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon30}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div><div class="col1" >
+    {% if  temp31 and date31 and humidity31 and weather31 and icon31 %}
+<marquee><h4><b>Date and Time</b>:{{date31}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity31}}</h5>
+        <h5><b>Temp </b>: {{temp31}}</h5>
+      <h5><b>Weather</b>:{{weather31}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon31}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp32 and date32 and humidity32 and weather32 and icon32 %}
+<marquee><h4><b>Date and Time</b>:{{date32}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity32}}</h5>
+        <h5><b>Temp </b>: {{temp32}}</h5>
+      <h5><b>Weather</b>:{{weather32}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon32}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp33 and date33 and humidity33 and weather33 and icon33 %}
+<marquee><h4><b>Date and Time</b>:{{date33}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity33}}</h5>
+        <h5><b>Temp </b>: {{temp33}}</h5>
+      <h5><b>Weather</b>:{{weather33}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon33}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp34 and date34 and humidity34 and weather34 and icon34%}
+<marquee><h4><b>Date and Time</b>:{{date34}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity34}}</h5>
+        <h5><b>Temp </b>: {{temp34}}</h5>
+      <h5><b>Weather</b>:{{weather34}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon34}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp35 and date35 and humidity35 and weather35 and icon35%}
+<marquee><h4><b>Date and Time</b>:{{date35}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity35}}</h5>
+        <h5><b>Temp </b>: {{temp35}}</h5>
+      <h5><b>Weather</b>:{{weather35}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon35}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div><div class="col1" >
+    {% if  temp36 and date36 and humidity36 and weather36 and icon36 %}
+<marquee><h4><b>Date and Time</b>:{{date36}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity36}}</h5>
+        <h5><b>Temp </b>: {{temp36}}</h5>
+      <h5><b>Weather</b>:{{weather36}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon36}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp37 and date37 and humidity37 and weather37 and icon37 %}
+<marquee><h4><b>Date and Time</b>:{{date37}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity37}}</h5>
+        <h5><b>Temp </b>: {{temp37}}</h5>
+      <h5><b>Weather</b>:{{weather37}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon37}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+    <div class="col1" >
+    {% if  temp38 and date38 and humidity38 and weather38 and icon38 %}
+<marquee><h4><b>Date and Time</b>:{{date38}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity38}}</h5>
+        <h5><b>Temp </b>: {{temp38}}</h5>
+      <h5><b>Weather</b>:{{weather38}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon38}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+
+
+
+    <div class="col1" >
+    {% if  temp39 and date39 and humidity39 and weather39 and icon39 %}
+<marquee><h4><b>Date and Time</b>:{{date39}}</h4></marquee>
+     <h5><b>Humidity </b>: {{humidity39}}</h5>
+        <h5><b>Temp </b>: {{temp39}}</h5>
+      <h5><b>Weather</b>:{{weather39}}</h5>
+<div class="divicon">
+<img src=http://openweathermap.org/img/wn/{{icon39}}@2x.png alt="Image">
+  </div>
+
+    {% endif %}
+
+  </div>
+
+
+          </div>
+
+      </div>
+     <br>
+  </div>
+ </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .div2
+        {
+        background-color:grey;
+        height:100px;
+        width:100px;
+        margin:0 auto;
+        padding:40px;
+        }
+    .button2
+
+   {
+   background-color: aqua;
+   border-radius:20px;
+   color: purple;
+   padding:15px 32px;
+   text-align:center;
+   display:inline-block;
+   font-size:20px;
+   margin-left:1200px;
+   }
+
+
+    .button1
+    {
+    border-radius:5px;}
+    </style>
+    <title>Title</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+Logged In as {{ user.username }}
+
+<form action="{% url 'logout' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="button2"><b style="purple"> <b>LOGOUT</b></b></button>
+</form>
+<br>
+<br>
+<!--a href="#">logout</a-->
+{% else %}
+<br>
+<div class="div2">
+<a href="{% url 'signup' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="button1">signup</button>
+</a>
+
+<br>
+<a href="{% url 'login' %}" method="POST"  >
+
+    {% csrf_token %}
+    <button type="submit" class="button2">login</button>
+</a>
+{% endif %}
+</div>
+{% block content %}{% endblock %}
+</body>
+</html>
